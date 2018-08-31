@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 
-app.get('/', (req, res) => {
-    res.render('home', { msg: 'Hello World!' });
-  })
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
+
+const Review = mongoose.model('Review', {
+  title: String
+});
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
@@ -21,6 +24,16 @@ let reviews = [
 ]
 
 // INDEX
-app.get('/reviews', (req, res) => {
-  res.render('reviews-index', { reviews: reviews });
+app.get('/', (req, res) => {
+  Review.find()
+    .then(reviews => {
+      res.render('reviews-index', { reviews: reviews });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+})
+
+Review.find().then((review) => {
+  // Code in here is executed when the promise resolves
 })
