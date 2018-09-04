@@ -14,7 +14,9 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
 
 const Review = mongoose.model('Review', {
-  title: String
+  title: String,
+  movieTitle: String,
+  description: String,
 });
 
 const bodyParser = require('body-parser');
@@ -53,8 +55,12 @@ app.get('/reviews/new', (req, res) => {
 
 //Create
 app.post('/reviews', (req, res) => {
-  console.log(req.body);
-  // res.render('reviews-new', {});
+  Review.create(req.body).then((review) => {
+    console.log(review);
+    res.redirect('/');
+  }).catch((err) => {
+    console.log(err.message);
+  })
 })
 
 Review.find().then((reviews) => {
