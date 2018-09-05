@@ -11,12 +11,13 @@ const express = require('express')
 const app = express()
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/rotten-potatoes', { useMongoClient: true });
 
 const Review = mongoose.model('Review', {
   title: String,
   movieTitle: String,
   description: String,
+  ratingDropdown: Number
 });
 
 const bodyParser = require('body-parser');
@@ -57,11 +58,21 @@ app.get('/reviews/new', (req, res) => {
 app.post('/reviews', (req, res) => {
   Review.create(req.body).then((review) => {
     console.log(review);
-    res.redirect('/');
+    res.redirect(`/reviews/${review._id}`);
   }).catch((err) => {
     console.log(err.message);
   })
 })
+
+//Show
+
+app.get('/reviews/:id', (req, res) => {
+  Review.findById(req.params.id).then((review) => {
+    res.render('reviews-show', { review: review })
+  }).catch((err) => {
+    console.log(err.message);
+  })
+});
 
 Review.find().then((reviews) => {
   // Code in here is executed when the promise resolves
