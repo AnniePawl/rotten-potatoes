@@ -40,7 +40,7 @@ app.use(methodOverride('_method'))
 //Import Routes
 const reviews = require('./controllers/reviews.js')(app)
 
-//Import Review Model 
+//Import Review Model
 const Reviews = require('./models/review');
 
 //Server Start
