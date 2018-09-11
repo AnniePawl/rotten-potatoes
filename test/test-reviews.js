@@ -25,6 +25,13 @@ const server = require('../app');
 const should = chai.should();
 const Review = require('../models/review');
 
+
+const sampleReview =     {
+    "title": "Super Sweet Review",
+    "movie-title": "La La Land",
+    "description": "A great review of a lovely movie."
+}
+
 chai.use(chaiHttp);
 
 describe('Reviews', ()  => {
@@ -32,7 +39,8 @@ describe('Reviews', ()  => {
   // TEST INDEX
   it('should index ALL reviews on / GET', (done) => {
     chai.request(server)
-        .get('/')
+
+        });
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.html;
@@ -40,7 +48,18 @@ describe('Reviews', ()  => {
         });
   });
 
-  // TEST NEW
+ // TEST NEW
+  it('should display new form on /reviews/new GET', (done) => {
+      chai.request(server)
+        .get(`/reviews/new`)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.should.be.html
+            done();
+          });
+    });
+
+
   // TEST CREATE
   // TEST SHOW
   // TEST EDIT
