@@ -6,27 +6,44 @@
 
 //Express JS -- lightweight web application framework
 
-
+//Express Modules & Objects
 const express = require('express')
-const methodOverride = require('method-override')
-const exphbs = require('express-handlebars');
-const bodyParser = require('body-parser');
 const app = express()
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
 
 
+//Database
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/rotten-potatoes', { useMongoClient: true });
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+//Routers ??
+// const home = require("./controllers/home");
+// const reviews = require("./controllers/reviews");
+// const comments = require("./controllers/comments");
 
 
+//Handlebars
+var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-require('./controllers/reviews')(app)
 
+//Middleware, Route Configuration ``
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
+// app.use('/', home);
+// app.use('/reviews', reviews);
+//
+
+//Import Routes
+const reviews = require('./controllers/reviews.js')(app)
+
+//Import Review Model 
+const Reviews = require('./models/review');
+
+//Server Start
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
 })
