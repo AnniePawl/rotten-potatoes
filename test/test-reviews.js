@@ -65,3 +65,15 @@ it('should display new form on /reviews/new GET', (done) => {
               done();
           });
   });
+
+  // TEST CREATE
+it('should create a SINGLE review on /reviews POST', (done) =>{
+    chai.request('http://localhost:3000')
+    .post('/reviews')
+    .send(sampleReview)
+    .end((err, res) =>{
+        res.should.have.status(200);
+        res.should.be.html
+        done();
+    });
+});
