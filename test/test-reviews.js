@@ -91,3 +91,32 @@ it('should create a SINGLE review on /reviews POST', (done) =>{
            });
    });
 });
+
+// TEST EDIT
+it('should edit a SINGLE review on /reviews/<id>/edit GET', (done) => {
+      var review = new Review(sampleReview);
+      review.save((err, data) => {
+          chai.request('http://localhost:3000')
+              .get(`/reviews/${data._id}/edit`)
+              .end((err, res) =>{
+                  res.should.have.status(200);
+                  res.should.be.html
+                  done();
+              });
+      });
+  });
+
+  // TEST UPDATE
+it('should edit a SINGLE review on /reviews/<id> PUT', (done) => {
+     var review = new Review(sampleReview);
+     review.save((err, data) => {
+         chai.request('http://localhost:3000')
+             .put(`/reviews/${data._id}?_method=PUT`)
+             .send({'title': 'Updating the title'})
+             .end((err, res) => {
+                 res.should.have.status(200);
+                 res.should.be.html
+                 done();
+             });
+     });
+ });
