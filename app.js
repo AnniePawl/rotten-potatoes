@@ -44,6 +44,6 @@ const reviews = require('./controllers/reviews.js')(app)
 const Reviews = require('./models/review');
 
 //Server Start
-app.listen(3000, () => {
+module.exports = app.listen(3000, () => {
   console.log('App listening on port 3000!')
 })
