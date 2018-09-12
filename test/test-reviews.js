@@ -25,7 +25,6 @@ const server = require('../app');
 const should = chai.should();
 const Review = require('../models/review');
 
-
 const sampleReview =     {
     "title": "Super Sweet Review",
     "movie-title": "La La Land",
@@ -36,33 +35,33 @@ chai.use(chaiHttp);
 
 describe('Reviews', ()  => {
 
+    after(() => {
+    Review.deleteMany({title: 'Super Sweet Review'}).exec((err, reviews) => {
+      console.log(reviews)
+      reviews.remove();
+    })
+  });
+
+
   // TEST INDEX
   it('should index ALL reviews on / GET', (done) => {
     chai.request(server)
-
-        });
+        .get('/')
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.html;
           done();
         });
   });
-
- // TEST NEW
-  it('should display new form on /reviews/new GET', (done) => {
-      chai.request(server)
-        .get(`/reviews/new`)
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.should.be.html
-            done();
-          });
-    });
-
-
-  // TEST CREATE
-  // TEST SHOW
-  // TEST EDIT
-  // TEST UPDATE
-  // TEST DELETE
 });
+
+// TEST NEW
+it('should display new form on /reviews/new GET', (done) => {
+      chai.request('http://localhost:3000')
+          .get(`/reviews/new`)
+          .end((err, res) =>{
+              res.should.have.status(200);
+              res.should.be.html
+              done();
+          });
+  });
