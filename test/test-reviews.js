@@ -120,3 +120,18 @@ it('should edit a SINGLE review on /reviews/<id> PUT', (done) => {
              });
      });
  });
+
+
+ // TEST DELETE
+ it('should edit a SINGLE review on /reviews/<id> DELETE', (done) => {
+       var review = new Review(sampleReview);
+       review.save((err, data) => {
+           chai.request('http://localhost:3000')
+               .delete(`/reviews/${data._id}?_method=DELETE`)
+               .end((err, res) => {
+                   res.should.have.status(200);
+                   res.should.be.html
+                   done();
+               });
+       });
+   });
