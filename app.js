@@ -15,14 +15,13 @@ const methodOverride = require('method-override')
 
 //Database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/rotten-potatoes', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/rotten-potatoes');
 
 
 //Routers ??
 // const home = require("./controllers/home");
 // const reviews = require("./controllers/reviews");
 // const comments = require("./controllers/comments");
-
 
 //Handlebars
 var exphbs = require('express-handlebars');
