@@ -7,40 +7,40 @@
 //Express JS -- lightweight web application framework
 
 //Express Modules & Objects
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 
 
 //Database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/rotten-potatoes');
+mongoose.connect('mongodb://localhost:27017/rotten-potatoes', {useNewUrlParser: true});
 
+//Import Review Model
+const Review = require('./models/review');
+//Import Comment Model
+const Comment = require ('./models/comment');
 
-//Routers ??
 // const home = require("./controllers/home");
-// const reviews = require("./controllers/reviews");
-// const comments = require("./controllers/comments");
 
 //Handlebars
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-
 //Middleware, Route Configuration ``
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
+
 // app.use('/', home);
 // app.use('/reviews', reviews);
-//
+//app.use('/reviews/comments', comments);
 
 //Import Routes
-const reviews = require('./controllers/reviews.js')(app)
-
-//Import Review Model
-const Reviews = require('./models/review');
+const reviews = require('./controllers/reviews.js')(app);
+const comment = require('./controllers/comments.js')(app);
+// const comments = require('./controllers/comments.js')(app);
 
 //Server Start
 module.exports = app.listen(3000, () => {
