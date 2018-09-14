@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 const Comment = require('../models/comment')
 
@@ -13,3 +14,13 @@ function comments(app) {
 }
 
 module.exports = comments;
+=======
+export default function (app) {
+
+  // NEW Comment
+  app.post('/reviews/comments', (req, res) => {
+    res.send('reviews comment')
+  })
+
+}
+>>>>>>> fe4fd94a183f49c675caa2baabf142f51a0b1c04
