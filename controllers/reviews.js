@@ -40,8 +40,10 @@ const Comment = require('../models/comment')
   //Show
   app.get('/reviews/:id', (req, res) => {
     // find review
+    console.log(req.params.id)
     Review.findById(req.params.id).then(review => {
       // fetch its comments
+
       Comment.find({ reviewId: req.params.id }).then(comments => {
         // respond with the template with both values
         res.render('reviews-show', { review: review, comments: comments })
@@ -68,7 +70,7 @@ app.put('/reviews/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err.message)
-    })
+  })
 })
 
 // DELETE
