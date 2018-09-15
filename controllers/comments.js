@@ -1,12 +1,13 @@
-<<<<<<< HEAD
 
+const express = require('express')
 const Comment = require('../models/comment')
+const app = express()
 
 function comments(app) {
     // CREATE Comment
-    app.post('/reviews/comments', (req, res) => {
+    app.post('/reviews/:reviewId/comments/new', (req, res) => {
       Comment.create(req.body).then(comment => {
-        res.redirect(`/reviews/${comment.reviewId}`)
+        res.redirect('/reviews/' + comment.reviewId)
       }).catch((err) => {
         console.log(err.message)
       })
@@ -14,13 +15,8 @@ function comments(app) {
 }
 
 module.exports = comments;
-=======
-export default function (app) {
 
   // NEW Comment
   app.post('/reviews/comments', (req, res) => {
     res.send('reviews comment')
   })
-
-}
->>>>>>> fe4fd94a183f49c675caa2baabf142f51a0b1c04
