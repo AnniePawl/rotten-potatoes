@@ -1,14 +1,10 @@
-//Routers for Reviews
-// const express = require('express');
-// const app = express();
 
 module.exports= (app) =>{
 
 const Review = require('../models/review')
 const Comment = require('../models/comment')
 
-
-//Index
+//INDEX
   app.get('/', (req, res) => {
     Review.find()
       .then(reviews => {
@@ -19,14 +15,12 @@ const Comment = require('../models/comment')
       });
   });
 
-
-//New
+//NEW
   app.get('/reviews/new', (req, res) => {
     res.render('reviews-new', {});
   })
 
-
-  //Create
+  //CREATE
   app.post('/reviews', (req, res) => {
     Review.create(req.body).then((review) => {
       console.log(review);
@@ -36,8 +30,7 @@ const Comment = require('../models/comment')
     })
   })
 
-
-  //Show
+  //SHOW
   app.get('/reviews/:id', (req, res) => {
     // find review
     console.log(req.params.id)
@@ -53,7 +46,6 @@ const Comment = require('../models/comment')
       console.log(err.message)
     });
   });
-
 
  // EDIT
   app.get('/reviews/:id/edit', function (req, res) {
@@ -82,8 +74,6 @@ app.delete('/reviews/:id', function (req, res) {
     console.log(err.message);
   })
 })
-
-
 
 // DELETE
 app.delete('/reviews/comments/:id', function (req, res) {

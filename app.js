@@ -15,7 +15,7 @@ const methodOverride = require('method-override');
 
 //Database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/rotten-potatoes', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost/rotten-potatoes', {useNewUrlParser: true});
 
 //Import Review Model
 const Review = require('./models/review');
