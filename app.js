@@ -11,11 +11,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-
+const port = process.env.PORT || 3000;
 
 //Database
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost/rotten-potatoes', {useNewUrlParser: true});
+
 
 //Import Review Model
 const Review = require('./models/review');
@@ -43,6 +43,14 @@ const comment = require('./controllers/comments.js')(app);
 // const comments = require('./controllers/comments.js')(app);
 
 //Server Start
-module.exports = app.listen(3000, () => {
-  console.log('App listening on port 3000!')
+
+app.listen(port, () => {
+	console.log("App listening on port 3000")
 })
+
+mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost: 27017/rotten-potatoes', {useNewUrlParser: true});
+
+module.exports = app;
+// module.exports = app.listen(3000, () => {
+//   console.log('App listening on port 3000!')
+// })
