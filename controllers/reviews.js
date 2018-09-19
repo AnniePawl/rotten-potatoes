@@ -11,7 +11,7 @@ const Comment = require('../models/comment')
         res.render('reviews-index', {reviews: reviews});
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
       });
   });
 
