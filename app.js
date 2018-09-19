@@ -48,7 +48,7 @@ app.listen(port, () => {
 	console.log("App listening on port 3000")
 })
 
-mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost: 27017/rotten-potatoes', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost:27017/rotten-potatoes', {useNewUrlParser: true});
 
 module.exports = app;
 // module.exports = app.listen(3000, () => {
