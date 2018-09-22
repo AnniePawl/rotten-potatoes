@@ -15,12 +15,16 @@ const port = process.env.PORT || 3000;
 
 //Database
 const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rotten-potatoes', {useNewUrlParser: true});
 
-
+//ROUTES
 //Import Review Model
 const Review = require('./models/review');
 //Import Comment Model
 const Comment = require ('./models/comment');
+//Movie Database
+const Movies = require('./controllers/movies');
+// require('./controllers/movies.js')(app);
 
 // const home = require("./controllers/home");
 
@@ -36,11 +40,14 @@ app.use(methodOverride('_method'))
 // app.use('/', home);
 // app.use('/reviews', reviews);
 //app.use('/reviews/comments', comments);
+//app.use('/', movies);
+
 
 //Import Routes
 const reviews = require('./controllers/reviews.js')(app);
 const comment = require('./controllers/comments.js')(app);
-// const comments = require('./controllers/comments.js')(app);
+const movies = require('./controllers/movies.js')(app);
+
 
 //Server Start
 
@@ -48,7 +55,7 @@ app.listen(port, () => {
 	console.log("App listening on port 3000")
 })
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rotten-potatoes', {useNewUrlParser: true});
+
 
 module.exports = app;
 // module.exports = app.listen(3000, () => {
