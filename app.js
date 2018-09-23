@@ -22,8 +22,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rotten-po
 const Review = require('./models/review');
 //Import Comment Model
 const Comment = require ('./models/comment');
-//Movie Database
-const Movies = require('./controllers/movies');
+
 // require('./controllers/movies.js')(app);
 
 // const home = require("./controllers/home");
@@ -34,7 +33,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //Middleware, Route Configuration ``
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(methodOverride('_method'))
 
 // app.use('/', home);
@@ -44,9 +43,9 @@ app.use(methodOverride('_method'))
 
 
 //Import Routes
-const reviews = require('./controllers/reviews.js')(app);
-const comment = require('./controllers/comments.js')(app);
-const movies = require('./controllers/movies.js')(app);
+const reviews = require('./controllers/reviews')(app);
+const comment = require('./controllers/comments')(app);
+const movies = require('./controllers/movies')(app);
 
 
 //Server Start

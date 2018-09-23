@@ -1,19 +1,8 @@
 
-module.exports= (app) =>{
+module.exports = (app) =>{
 
 const Review = require('../models/review')
 const Comment = require('../models/comment')
-
-//INDEX
-  // app.get('/', (req, res) => {
-  //   Review.find()
-  //     .then(reviews => {
-  //       res.render('reviews-index', {reviews: reviews});
-  //     })
-  //     .catch(err => {
-  //       console.log(err.message);
-  //     });
-  // });
 
 //NEW
   app.get('/reviews/new', (req, res) => {

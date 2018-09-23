@@ -1,1 +1,23 @@
-<h1>Hello Movies!</h1>
+<style>
+
+h1{
+    text-align: center;
+}
+
+.movie-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+</style>
+
+<h1>In Theaters</h1>
+<div class="movie-container">
+{{#each movies}}
+        <p class="movie-title">{{this.title}}</p>
+    <p><a href="/movies/{{this.id}}">
+        <img src="https://image.tmdb.org/t/p/w500{{this.poster_path}}" alt="{{this.title}}" width="300">
+    </a></p>
+
+{{/each}}
+</div>
