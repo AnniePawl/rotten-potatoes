@@ -1,4 +1,8 @@
+<!-- Button  -->
 
+<div class="text-right">
+    <a href="/movies/{{movie.id}}/reviews/new" class="btn btn-primary">Write Review</a>
+</div>
 
 <div class="row">
     <div class="col-sm-4">
@@ -8,4 +12,18 @@
         <h1>{{movie.title}}</h1>
         <p class="lead">{{movie.overview}}</p>
     </div>
+
+
+    <h3>Reviews</h3>
+    {{#each reviews}}
+<div>
+    <h1><a href="/reviews/{{this._id}}"></h1>
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p><a href="/reviews/{{review._id}}/edit">Edit</a></p>
+  <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
+      <button class="btn btn-primary" type="submit">Delete</button>
+  </form></p>
+    </a>
+    {{/each}}
 </div>

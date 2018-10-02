@@ -33,9 +33,11 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //Middleware, Route Configuration ``
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
+
+//Different way to
 // app.use('/', home);
 // app.use('/reviews', reviews);
 //app.use('/reviews/comments', comments);
@@ -51,9 +53,8 @@ const movies = require('./controllers/movies')(app);
 //Server Start
 
 app.listen(port, () => {
-	console.log("App listening on port 3000")
+	console.log(`App listening on port ${port}`)
 })
-
 
 
 module.exports = app;
