@@ -34,17 +34,17 @@ const Comment = require('../models/comment')
   });
 
  // EDIT
-  app.get('/reviews/:id/edit', function (req, res) {
+  app.get('/movies/:movieId/reviews/:id/edit', function (req, res) {
     Review.findById(req.params.id, function(err, review) {
       res.render('reviews-edit', {review: review});
     })
   })
 
 // UPDATE
-app.put('/reviews/:id', (req, res) => {
+app.put('/movies/:movieId/reviews/:id', (req, res) => {
   Review.findByIdAndUpdate(req.params.id, req.body)
     .then(review => {
-      res.redirect(`/reviews/${review._id}`)
+      res.redirect(`/movies/${review.movieID}/reviews/${review._id}`)
     })
     .catch(err => {
       console.log(err.message)
@@ -52,7 +52,7 @@ app.put('/reviews/:id', (req, res) => {
 })
 
 // DELETE REVIEWS
-app.delete('/reviews/:id', function (req, res) {
+app.delete('/movies/:movieId/reviews/:id', function (req, res) {
   console.log("DELETE review")
   Review.findByIdAndRemove(req.params.id).then((review) => {
     res.redirect('/');
